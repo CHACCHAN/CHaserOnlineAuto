@@ -1,0 +1,4 @@
+!-CHaserOnlineServerDomainAddress-!
+"http://www7019ug.sakura.ne.jp:80/CHaserOnline003/user/"
+!-ProxyAddress-!
+"proxy.spec.ed.jp:80"

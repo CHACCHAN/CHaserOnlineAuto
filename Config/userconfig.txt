@@ -1,0 +1,20 @@
+!-USER ACCOUNT NAME 01-!
+"cool"
+!-USER PASSWORD 01-!
+"cool"
+!-USER ACCOUNT NAME 02-!
+"cool2"
+!-USER PASSWORD 02-!
+"cool"
+!-USER ACCOUNT NAME 03-!
+"cool3"
+!-USER PASSWORD 03-!
+"cool"
+!-USER ACCOUNT NAME 04-!
+"cool4"
+!-USER PASSWORD 04-!
+"cool"
+!-USER ACCOUNT NAME 05-!
+"hot2"
+!-USER PASSWORD 05-!
+"hot"
