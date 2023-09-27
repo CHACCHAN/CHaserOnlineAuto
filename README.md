@@ -1,27 +1,27 @@
 # CHaserOnlineAuto - v2.1
 **制作 三郷工業技術高等学校 電子計算機部**
   
- ##更新内容
+ ## 更新内容
  ┣➜ マップシステム用の変数が公開されました。 
  ┣➜ [新機能] アクセス設定ができるようになりました。 
  ┗➜ [追加] MapDataを追加しました。 
   
- ##概要
+ ## 概要
  ┣➜ CHaserOnlineより快適に実行出来るように開発されたものです。 
  ┗➜ このプログラムはC言語で作られています。 
   
- ##推奨ハードウェア条件 
+ ## 推奨ハードウェア条件 
  ┣➜ CPU   : 2010年以降のIntel製CPU、AMD製CPU 
  ┗➜ メモリ : DDR3 1333MHz 512MB 以上 
   
- ##対応プラットフォーム 
+ ## 対応プラットフォーム 
  ┣➜ Linuxのみ 
  ┗➜ (Ubuntu 20.04、CentOS7、WSL2で動作確認済み) 
   
- ##必要ソフトウェア 
+ ## 必要ソフトウェア 
  ┗➜ gcc version 11.3.0以上 
   
- ##ディレクトリ構成 
+ ## ディレクトリ構成 
 ```
  CHaserOnlineAuto-v2.1 
  ┣ Config 
@@ -47,7 +47,7 @@
   ```
  
   
- ##実践 
+## 実践 
  　　1. CHaserOnlineのアカウント登録をしよう！ 
  　　　まず始めに、自身のCHaserOnlineアカウントの登録を行います。 
  　　　/Config/userconfig.txt から""で囲まれたところにID、パスワードを入力して保存してください。 
@@ -72,7 +72,7 @@
  　　　また、MapSystemというものがありマップ上の情報を常に記録してくれているものがあります。 
  　　　マップ情報を参照して作戦に役立てるというやり方もありますので、詳しい使い方は項目「MapSystem の使い方」をご覧ください。 
   
- ##起動 
+## 起動 
  　　※初回起動の場合 
  　　最初だけやらなくてはならない設定があります。 
  　　設定を無視すると、以下のようなエラーが表示されます。 
@@ -83,13 +83,13 @@
  　　($ は抜きで入力してください) 
  　　これで、次回から[ ./start.sh ]で起動できます！ 
   
- ##start.sh の使い方
+## start.sh の使い方
  　　このスクリプトファイルは、以下のコマンドを自動的に実行します。 
  　　1. gcc -o CHaserOnline CHaserOnline.c ・・・ gccコンパイラを用いてCHaserOnline.cをCHaserOnlineという実行可能ファイルにコンパイルする。 
  　　2. clear ・・・ ターミナルをクリアする。 
  　　3. ./CHaserOnline ・・・ 実行可能ファイルのCHaserOnlineをBASHで実行する。 
   
- ##CHaserOnline.c の使い方
+## CHaserOnline.c の使い方
  　　このソースファイルは、CHaserOnlineAutoの本体になります。 
  　　実行すると、次のような指示がありますので、それについて解説します。 
   
@@ -106,7 +106,7 @@
  　　　 選択を終えると、Action.cとBase.cとCommand.cとGetReady.cのコンパイルが自動的に行われ指定したルーム分CHaserOnlineが実行されます。 
   
  
- ##MapSystem の使い方 
+## MapSystem の使い方 
  　　MapSystemとは...取得した情報を多様な角度から常に記録していたり、判断してくれたりしてくれる頼れる味方です。 
  　　MapSystemには、次のような変数が用意されています。 
  　　 1. MapData[19][19] ･･･ マップ情報19x19分を格納 
@@ -122,7 +122,7 @@
  　　 3. [?]  ･･･ 0や70などのただのアイテム番号(CHaserOnline2023に基づく) 
   
   
- ##ヘルパー関数
+## ヘルパー関数
  SelectID関数
  ライブラリ : CHaserTools.h 
  書式       : int SelectID(int data, int start, int end); 
