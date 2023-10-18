@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -16,10 +18,324 @@ char ServerAddress[MAX_LENGTH];
 char fname[] = "Config/userconfig.txt";
 char fname2[] = "Config/addressconfig.txt";
 char Checkflag[] = "src/Cash/UserCheckFlag.txt";
+char SampleHeader[] = "Sample/Header";
+char SampleSrc[] = "Sample/Src";
 
 // プロトタイプ宣言
 void NormalRun(char*, char*, char*);
 void LoopRun(char*, char*, char*);
+
+// 通常実行
+void NormalRun(char *username, char *password, char *Checkflag)
+{
+    FILE *file = NULL;
+    char fmessage[10];
+    int  i;
+    int  flag = FALSE;
+    char RoomNumber[MAX_LENGTH];
+    char RunCommand[MAX_LENGTH];
+    char Proxy[MAX_LENGTH];
+    char x[MAX_LENGTH];
+
+    // ルーム番号入力
+    printf("\n> ルーム番号を指定してください\n=");
+    fgets(RoomNumber,MAX_LENGTH,stdin);
+    strtok(RoomNumber,"\n");
+
+    // プロキシサーバー
+    while(TRUE)
+    {
+        printf("\n> プロキシサーバーを利用しますか？(Y or N)\n=");
+        fgets(Proxy,MAX_LENGTH,stdin);
+        strtok(Proxy,"\n");
+        if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
+        {
+            strcpy(x,ProxyAddress);
+            break;
+        }
+        else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
+        {
+            strcmp(x,"");
+            break;
+        }
+        else
+        {
+            printf("\n> エラー\n> 入力に誤字があります\n");
+        }
+    }
+    
+    // 処理実行
+    while(flag == FALSE)
+    {
+        system("cd src;rm a.out");
+        system("cd src;gcc Base.c Command.c GetReady.c Action.c");
+        if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
+        {
+            sprintf(RunCommand,"cd src;./a.out %s -u %s -p %s -r %d -x %s",ServerAddress,username,password,atoi(RoomNumber),x);
+            system(RunCommand);
+        }
+        else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
+        {
+            sprintf(RunCommand,"cd src;./a.out %s -u %s -p %s -r %d",ServerAddress,username,password,atoi(RoomNumber));
+            system(RunCommand);
+        }
+
+        // User CheckNGの再試行
+        file = fopen(Checkflag,"r");
+        fscanf(file,"%s",&fmessage);
+        fclose(file);  
+
+        if(strcmp(fmessage,"CheckComplete") == 0)
+        {
+            flag = TRUE;
+        }
+        else if(strcmp(fmessage,"Unchecked") == 0)
+        {
+            printf("\n\n> コンパイルエラーが発生しました\n> 詳しい内容はErrorHelp.txtでエラーコードを参照してください\n> エラーコード[ME001]\n");
+            exit(1);
+        }
+        else
+        {
+            printf("\n\n> エラー\n> User CheckNGなので、再試行します。\n");
+        }
+
+        // 待機
+        printf("\n");
+        for(i = 10; (i >= 1 && flag == FALSE); i--)
+        {
+            printf("> [待機中] しばらくお待ちください...あと%d秒..\n",i);
+            sleep(1);
+        }
+        printf("\n");
+    }
+    
+    
+    printf("\n\n> 処理が終了しました\n");
+}
+
+// 連続実行
+void LoopRun(char* username, char* password,char* Checkflag)
+{
+    FILE *file = NULL;
+    char fmessage[10];
+    int  i;
+    int  temp;
+    int  StartRoomNumber;
+    int  EndRoomNumber;
+    char StartRoomNumberCash[MAX_LENGTH];
+    char EndRoomNumberCash[MAX_LENGTH];
+    int  flag = FALSE;
+    char RunCommand[MAX_LENGTH];
+    char Proxy[MAX_LENGTH];
+    char x[MAX_LENGTH];
+
+    // ルーム番号選択
+    printf("\n> [X]番 ～ [Y]番まで実行");
+    printf("\n> [X] = ");
+    fgets(StartRoomNumberCash,MAX_LENGTH,stdin);
+    strtok(StartRoomNumberCash,"\n");
+
+    printf("\n [%s]番 ～ [Y]番まで実行",StartRoomNumberCash);
+    printf("\n> [Y] = ");
+    fgets(EndRoomNumberCash,MAX_LENGTH,stdin);
+    strtok(EndRoomNumberCash,"\n");
+
+    StartRoomNumber = atoi(StartRoomNumberCash);
+    EndRoomNumber = atoi(EndRoomNumberCash);
+
+    if(StartRoomNumber > EndRoomNumber)
+    {
+        temp = EndRoomNumber;
+        EndRoomNumber = StartRoomNumber;
+        StartRoomNumber = temp;
+    }
+
+
+    // プロキシサーバー
+    while(TRUE)
+    {
+        printf("\n> プロキシサーバーを利用しますか？(Y or N)\n=");
+        fgets(Proxy,MAX_LENGTH,stdin);
+        strtok(Proxy,"\n");
+        if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
+        {
+            strcpy(x,ProxyAddress);
+            break;
+        }
+        else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
+        {
+            strcmp(x,"");
+            break;
+        }
+        else
+        {
+            printf("\n> エラー\n> 入力に誤字があります\n");
+        }
+    }
+    
+    // 処理実行
+    system("cd src;rm a.out");
+    system("cd src;gcc Base.c Command.c GetReady.c Action.c");
+    while(flag == FALSE)
+    {
+        if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
+        {
+            sprintf(RunCommand,"cd src;./a.out %s -u %s -p %s -r %d -x %s",ServerAddress,username,password,StartRoomNumber,x);
+            system(RunCommand);
+            StartRoomNumber++;
+        }
+        else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
+        {
+            sprintf(RunCommand,"cd src;./a.out %s -u %s -p %s -r %d",ServerAddress,username,password,StartRoomNumber);
+            system(RunCommand);
+            StartRoomNumber++;
+        }
+        
+        // User CheckNGの再試行
+        file = fopen(Checkflag,"r");
+        fscanf(file,"%s",&fmessage);
+        fclose(file);
+
+        // 演算
+        if(StartRoomNumber <= EndRoomNumber && strcmp(fmessage,"CheckComplete") == 0)
+        {
+            printf("\n\n> [%d]番のルームを実行します\n",StartRoomNumber);
+        }
+        else if(strcmp(fmessage,"CheckNG") == 0)
+        {
+            printf("\n\n> エラー\n> User CheckNGなので、再試行します。\n");
+            StartRoomNumber--;
+        }
+        else if(strcmp(fmessage,"Unchecked") == 0)
+        {
+            printf("\n\n> コンパイルエラーが発生しました\n> 詳しい内容はErrorHelp.txtでエラーコードを参照してください\n> エラーコード[ME001]\n");
+            exit(1);
+        }
+        else
+        {
+            flag = TRUE;
+        }
+
+        // 待機
+        printf("\n");
+        for(i = 10; (i >= 1 && flag == FALSE); i--)
+        {
+            printf("> [待機中] しばらくお待ちください...あと%d秒..\n",i);
+            sleep(1);
+        }
+        printf("\n");
+    }
+    printf("\n\n> 処理が終了しました\n");
+}
+
+// サンプルモード
+void SampleMode(char* username, char* password)
+{
+    int  File_Count = 0;
+    char RoomNumber[MAX_LENGTH];
+    char RunCommand[MAX_LENGTH];
+    char Proxy[MAX_LENGTH];
+    char x[MAX_LENGTH];
+    char* HeaderFileName;
+    char* SrcFileName;
+
+    DIR *SampleHeaderDirectory = opendir(SampleHeader);
+    DIR *SampleSrcDirectory = opendir(SampleSrc);
+    if (SampleHeaderDirectory == NULL)
+    {
+        printf("Can not open the [%s]\n", SampleHeader);
+        exit(1);
+    }
+    if(SampleSrcDirectory == NULL)
+    {
+        printf("Can not open the [%s]\n", SampleSrc);
+        exit(1);
+    }
+
+    // ファイル名を格納する
+    struct dirent *entry;
+    struct dirent *entry2;
+    while ((entry = readdir(SampleHeaderDirectory)) != NULL) 
+    {
+        HeaderFileName = entry->d_name;
+        File_Count++;
+
+        if(File_Count > 3)
+        {
+            printf("\n> エラー\n");
+            printf("サンプルヘッダーは1つまで\n");
+            exit(1);
+        }
+    }
+    File_Count = 0;
+    
+    while ((entry2 = readdir(SampleSrcDirectory)) != NULL) 
+    {
+        SrcFileName = entry2->d_name;
+        File_Count++;
+
+        if(File_Count > 3)
+        {
+            printf("\n> エラー\n");
+            printf("サンプルソースは1つまで\n");
+            File_Count = 0;
+            exit(1);
+        }
+    }
+    File_Count = 0;
+    closedir(SampleHeaderDirectory);
+    closedir(SampleSrcDirectory);
+
+    // コピーとコンパイル
+    sprintf(RunCommand,"cd Sample/Header;cp %s ../Src/;",HeaderFileName);
+    system(RunCommand);
+    sprintf(RunCommand,"cd Sample/Src;gcc %s",SrcFileName);
+    system(RunCommand);
+  
+    // ルーム番号入力
+    printf("\n> ルーム番号を指定してください\n=");
+    fgets(RoomNumber,MAX_LENGTH,stdin);
+    strtok(RoomNumber,"\n");
+
+    // プロキシサーバー
+    while(TRUE)
+    {
+        printf("\n> プロキシサーバーを利用しますか？(Y or N)\n=");
+        fgets(Proxy,MAX_LENGTH,stdin);
+        strtok(Proxy,"\n");
+        if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
+        {
+            strcpy(x,ProxyAddress);
+            break;
+        }
+        else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
+        {
+            strcmp(x,"");
+            break;
+        }
+        else
+        {
+            printf("\n> エラー\n> 入力に誤字があります\n");
+        }
+    }
+
+    // 処理実行
+    if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
+    {
+        sprintf(RunCommand,"cd Sample;cd Src;./a.out %s -u %s -p %s -r %d -x %s",ServerAddress,username,password,atoi(RoomNumber),x);
+        system(RunCommand);
+    }
+    else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
+    {
+        sprintf(RunCommand,"cd Sample;cd Src;./a.out %s -u %s -p %s -r %d",ServerAddress,username,password,atoi(RoomNumber));
+        system(RunCommand);
+    }
+
+    // コピーしたヘッダーと実行ファイルを削除
+    sprintf(RunCommand,"cd Sample/Src;rm %s",HeaderFileName);
+    system(RunCommand);
+    system("cd Sample/Src;rm a.out");
+}
 
 int main()
 {
@@ -155,6 +471,48 @@ int main()
                 printf("\n> エラー\n> 1～5から選んでください\n");
         }
     }
+    // モード選択
+    while(TRUE)
+    {
+        printf("\n> モードを選択してください\n> サンプルモード(S) 通常モード(T)\n=");
+        fgets(SelectStr,MAX_LENGTH,stdin);
+        strtok(SelectStr,"\n");
+        if(strcmp(SelectStr,"S") == 0 || strcmp(SelectStr,"s") == 0)
+        {
+            while(TRUE)
+            {
+                SampleMode(username[SelectNumber],password[SelectNumber]);
+                while(TRUE)
+                {
+                    printf("\n> 終了しますか？(Y or N)\n=");
+                    fgets(SelectStr,MAX_LENGTH,stdin);
+                    strtok(SelectStr,"\n");
+                    if(strcmp(SelectStr,"Y") == 0 || strcmp(SelectStr,"y") == 0)
+                    {  
+                        return 0;
+                    }
+                    else if(strcmp(SelectStr,"N") == 0 || strcmp(SelectStr,"n") == 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        printf("\n> エラー\n> 入力に誤字があります\n");
+                    }
+                }
+            }
+        }
+        else if(strcmp(SelectStr,"T") == 0 || strcmp(SelectStr,"t") == 0)
+        {
+            printf("\n> 通常モードで実行します\n");
+            sleep(1);
+            break;
+        }
+        else
+        {
+            printf("\n> エラー\n> 入力に誤字があります\n");
+        }
+    }
     
     // 処理パターン選択
     while(TRUE)
@@ -224,207 +582,4 @@ int main()
     }
     
     return 0;
-}
-
-// 通常実行
-void NormalRun(char *username, char *password, char *Checkflag)
-{
-    FILE *file = NULL;
-    char fmessage[10];
-    int  i;
-    int  flag = FALSE;
-    char RoomNumber[MAX_LENGTH];
-    char RunCommand[MAX_LENGTH];
-    char Proxy[MAX_LENGTH];
-    char x[MAX_LENGTH];
-
-    // ルーム番号入力
-    printf("\n> ルーム番号を指定してください\n=");
-    fgets(RoomNumber,MAX_LENGTH,stdin);
-    strtok(RoomNumber,"\n");
-
-    // プロキシサーバー
-    while(TRUE)
-    {
-        printf("\n> プロキシサーバーを利用しますか？(Y or N)\n=");
-        fgets(Proxy,MAX_LENGTH,stdin);
-        strtok(Proxy,"\n");
-        if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
-        {
-            strcpy(x,ProxyAddress);
-            break;
-        }
-        else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
-        {
-            strcmp(x,"");
-            break;
-        }
-        else
-        {
-            printf("\n> エラー\n> 入力に誤字があります\n");
-        }
-    }
-    
-    // 処理実行
-    while(flag == FALSE)
-    {
-        system("cd src;rm a.out");
-        system("cd src;gcc Base.c Command.c GetReady.c Action.c");
-        if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
-        {
-            sprintf(RunCommand,"cd src;./a.out %s -u %s -p %s -r %d -x %s",ServerAddress,username,password,atoi(RoomNumber),x);
-            system(RunCommand);
-        }
-        else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
-        {
-            sprintf(RunCommand,"cd src;./a.out %s -u %s -p %s -r %d",ServerAddress,username,password,atoi(RoomNumber));
-            system(RunCommand);
-        }
-
-        // User CheckNGの再試行
-        file = fopen(Checkflag,"r");
-        fscanf(file,"%s",&fmessage);
-        fclose(file);  
-
-        if(strcmp(fmessage,"CheckComplete") == 0)
-        {
-            flag = TRUE;
-        }
-        else if(strcmp(fmessage,"Unchecked") == 0)
-        {
-            printf("\n\n> コンパイルエラーが発生しました\n> 詳しい内容はErrorHelp.txtでエラーコードを参照してください\n> エラーコード[ME001]\n");
-            exit(1);
-        }
-        else
-        {
-            printf("\n\n> エラー\n> User CheckNGなので、再試行します。\n");
-        }
-
-        // 待機
-        printf("\n");
-        for(i = 10; (i >= 1 && flag == FALSE); i--)
-        {
-            printf("> [待機中] しばらくお待ちください...あと%d秒..\n",i);
-            sleep(1);
-        }
-        printf("\n");
-    }
-    
-    
-    printf("\n\n> 処理が終了しました\n");
-}
-
-//連続実行
-void LoopRun(char* username, char* password,char* Checkflag)
-{
-    FILE *file = NULL;
-    char fmessage[10];
-    int  i;
-    int  temp;
-    int  StartRoomNumber;
-    int  EndRoomNumber;
-    char StartRoomNumberCash[MAX_LENGTH];
-    char EndRoomNumberCash[MAX_LENGTH];
-    int  flag = FALSE;
-    char RunCommand[MAX_LENGTH];
-    char Proxy[MAX_LENGTH];
-    char x[MAX_LENGTH];
-
-    // ルーム番号選択
-    printf("\n> [X]番 ～ [Y]番まで実行");
-    printf("\n> [X] = ");
-    fgets(StartRoomNumberCash,MAX_LENGTH,stdin);
-    strtok(StartRoomNumberCash,"\n");
-
-    printf("\n [%s]番 ～ [Y]番まで実行",StartRoomNumberCash);
-    printf("\n> [Y] = ");
-    fgets(EndRoomNumberCash,MAX_LENGTH,stdin);
-    strtok(EndRoomNumberCash,"\n");
-
-    StartRoomNumber = atoi(StartRoomNumberCash);
-    EndRoomNumber = atoi(EndRoomNumberCash);
-
-    if(StartRoomNumber > EndRoomNumber)
-    {
-        temp = EndRoomNumber;
-        EndRoomNumber = StartRoomNumber;
-        StartRoomNumber = temp;
-    }
-
-
-    // プロキシサーバー
-    while(TRUE)
-    {
-        printf("\n> プロキシサーバーを利用しますか？(Y or N)\n=");
-        fgets(Proxy,MAX_LENGTH,stdin);
-        strtok(Proxy,"\n");
-        if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
-        {
-            strcpy(x,ProxyAddress);
-            break;
-        }
-        else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
-        {
-            strcmp(x,"");
-            break;
-        }
-        else
-        {
-            printf("\n> エラー\n> 入力に誤字があります\n");
-        }
-    }
-    
-    // 処理実行
-    system("cd src;rm a.out");
-    system("cd src;gcc Base.c Command.c GetReady.c Action.c");
-    while(flag == FALSE)
-    {
-        if(strcmp(Proxy,"Y") == 0 || strcmp(Proxy,"y") == 0)
-        {
-            sprintf(RunCommand,"cd src;./a.out %s -u %s -p %s -r %d -x %s",ServerAddress,username,password,StartRoomNumber,x);
-            system(RunCommand);
-            StartRoomNumber++;
-        }
-        else if(strcmp(Proxy,"N") == 0 || strcmp(Proxy,"n") == 0)
-        {
-            sprintf(RunCommand,"cd src;./a.out %s -u %s -p %s -r %d",ServerAddress,username,password,StartRoomNumber);
-            system(RunCommand);
-            StartRoomNumber++;
-        }
-        
-        // User CheckNGの再試行
-        file = fopen(Checkflag,"r");
-        fscanf(file,"%s",&fmessage);
-        fclose(file);
-
-        // 演算
-        if(StartRoomNumber <= EndRoomNumber && strcmp(fmessage,"CheckComplete") == 0)
-        {
-            printf("\n\n> [%d]番のルームを実行します\n",StartRoomNumber);
-        }
-        else if(strcmp(fmessage,"CheckNG") == 0)
-        {
-            printf("\n\n> エラー\n> User CheckNGなので、再試行します。\n");
-            StartRoomNumber--;
-        }
-        else if(strcmp(fmessage,"Unchecked") == 0)
-        {
-            printf("\n\n> コンパイルエラーが発生しました\n> 詳しい内容はErrorHelp.txtでエラーコードを参照してください\n> エラーコード[ME001]\n");
-            exit(1);
-        }
-        else
-        {
-            flag = TRUE;
-        }
-
-        // 待機
-        printf("\n");
-        for(i = 10; (i >= 1 && flag == FALSE); i--)
-        {
-            printf("> [待機中] しばらくお待ちください...あと%d秒..\n",i);
-            sleep(1);
-        }
-        printf("\n");
-    }
-    printf("\n\n> 処理が終了しました\n");
 }
