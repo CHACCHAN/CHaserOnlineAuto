@@ -16,6 +16,54 @@
             </a>
         </div>
     </nav>
+    <!-- ピックアップ部分 -->
+    <div class="position-fixed" style="top: 80px;left: -5px;">
+        <div class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#Pickup">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+                <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+                <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            </svg> News
+        </div>
+    </div>
+    <!-- ピックアップ内容 -->
+    <div class="modal fade" id="Pickup" tabindex="-1" aria-labelledby="PickupLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="PickupLabel">
+                        ピックアップ
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                            <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                        </svg> 新機能
+                    </div>
+                    <hr>
+                    <div class="modal-text">
+                        <ul>
+                            <li>
+                                全国情報技術教育研究会から発行しているサンプルプログラムを実行できるモードを追加しました。
+                            </li>
+                            <br>
+                            <li>
+                                プロキシ設定などのアクセス設定ができるようになりました。
+                            </li>
+                            <br>
+                            <li>
+                                MapData配列で、マップ情報の読み込みができるようになりました。
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container bg-light">
         <div class="row text-center">
             <div class="col-4">
@@ -102,8 +150,81 @@
                                         </div>
                                     </div>
                                     <br>
+                                    <br>
                                     <div class="card-text">
-                                        
+                                        CHaserOnlineAutoは、以下のようにディレクトリが構成されています。
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            ディレクトリ構成
+                                        </div>
+                                        <div class="card-body">
+                                            CHaserOnlineAuto/<br>
+                                            ├─ Config/<br>
+                                            │   ├─ addressconfig.txt<br>
+                                            │   └─ userconfig.txt<br>
+                                            ├─ Sample/<br>
+                                            │   ├─ Header/<br>
+                                            │   └─ Src/<br>
+                                            ├─ src/<br>
+                                            │   ├─ Cash/<br>
+                                            │   │   └─ UserCheckFlag.txt<br>
+                                            │   ├─ Header<br>
+                                            │   │   ├─ CHaserOnline2023.h<br>
+                                            │   │   ├─ CHaserTools.h<br>
+                                            │   │   └─ MapSystem.h<br>
+                                            │   ├─ Action.c<br>
+                                            │   ├─ Base.c<br>
+                                            │   ├─ Command.c<br>
+                                            │   └─ GetReady.c<br>
+                                            ├─ CHaserOnline.c<br>
+                                            ├─ README.html<br>
+                                            └─ start.sh<br>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="card-title h2">
+                                        実践
+                                    </div>
+                                    <hr>
+                                    <div class="h5">
+                                        CHaserOnlineアカウントを登録しよう!
+                                    </div>
+                                    <div class="card-text">
+                                        CHaserOnlineAutoでは、最大5つまでのアカウントを登録することができます。
+                                    </div>
+                                    <div class="card-text">
+                                        アカウントの登録をするには、まず、<mark>Config/userconfig.txt</mark>を開いて自身のIDとパスワードを入力します。
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-title">
+                                                    userconfig.txt
+                                                </div>
+                                                <img class="card-image-bottom" src="README\UserConfigFile.png">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-title">
+                                                    実行結果
+                                                </div>
+                                                <img class="card-image-bottom" src="README\UserConfigView.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="card-text">
+                                        これで、CHaserOnlineをプレイするときにわざわざ入力しなくても大丈夫になりました。
+                                    </div>
+                                    <br>
+                                    <div class="h5">
+                                        アクセス情報を設定しよう!
+                                    </div>
+                                    <div class="card-text">
+                                        CHaserOnlineサーバへアクセスするためには、予め
                                     </div>
                                 </div>
                             </li>
