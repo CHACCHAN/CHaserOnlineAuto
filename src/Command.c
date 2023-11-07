@@ -145,7 +145,7 @@ int command_code(char* param)
 
 		*/
 		}
-		// GetReadyの作戦はここまで↑
+		// GetReadyの作戦はここから↑
 		return GetReadyMode;
 	}
 	else if(strcmp(param,"command2=") == 0)
@@ -267,7 +267,7 @@ int command_code(char* param)
 		{
 			mode = 5;
 		}
-		// Actionの作戦はここまで↑
+		// Actionの作戦はここから↑
 		return mode;
 	}
 }

@@ -24,7 +24,6 @@ char SampleSrc[] = "Sample/Src";
 // プロトタイプ宣言
 void NormalRun(char*, char*, char*);
 void LoopRun(char*, char*, char*);
-void SampleMode(char*, char*);
 
 // 通常実行
 void NormalRun(char *username, char *password, char *Checkflag)
