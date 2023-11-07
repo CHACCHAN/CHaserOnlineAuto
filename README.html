@@ -187,7 +187,7 @@
                                     </div>
                                     <br>
                                     <div class="card-title h2">
-                                        実践
+                                        設定
                                     </div>
                                     <hr>
                                     <div class="h5">
@@ -227,7 +227,194 @@
                                         アクセス情報を設定しよう!
                                     </div>
                                     <div class="card-text">
-                                        CHaserOnlineサーバへアクセスするためには、予め
+                                        CHaserOnlineサーバへアクセスするためには、予め設定ファイルの編集をする必要があります。
+                                    </div>
+                                    <div class="card-text">
+                                        編集をするには、<mark>Config/addressconfig.txt</mark>を開いてサーバーアドレスと必要であればプロキシを入力します。
+                                    </div>
+                                    <div class="card-text">
+                                        デフォルトでは、埼玉県のサーバーアドレスと埼玉県立三郷工業技術高等学校情報技術科のプロキシが設定されています。
+                                    </div>
+                                    <div class="card my-3 mb-4">
+                                        <div class="row">
+                                            <div class="col-6 border-end pe-0">
+                                                <div class="card-header">
+                                                    <div class="text-secondary text-center">
+                                                        プロキシアドレス
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-text">
+                                                        !-CHaserOnlineServerDomainAddress-!
+                                                    </div>
+                                                    <div class="card-text">
+                                                        "ここにサーバーアドレスを入力"
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 ps-0">
+                                                <div class="card-header">
+                                                    <div class="text-secondary text-center">
+                                                        サーバーアドレス
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-text">
+                                                        !-ProxyAddress-!
+                                                    </div>
+                                                    <div class="card-text">
+                                                        "ここにプロキシを入力"
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-title h2">
+                                        実践
+                                    </div>
+                                    <hr>
+                                    <div class="h5">
+                                        GetReadyMoveをプログラミングしよう!
+                                    </div>
+                                    <div class="card-text">
+                                        CHaserOnlineAutoでは、GetReadyMoveは一つの役割を持つファイルへとなっており、従来のやり方と違ってより、可読性に優れたプログラミングを実現しています。
+                                    </div>
+                                    <div class="card-text">
+                                        GetReadyMoveをプログラミングするには、<mark>src/GetReady.c</mark>を開いて編集する必要があります。
+                                    </div>
+                                    <div class="card my-3">
+                                        <div class="row">
+                                            <div class="col-6 border-end pe-0">
+                                                <div class="card-header">
+                                                    <div class="text-secondary text-center">
+                                                        従来方式
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="text-secondary">CHaserOnlineClient2023public001.c</p>
+                                                    ...(省略)...<br>
+                                                    GetReadyMode = 4;<br><br>
+
+                                                    switch(GetReadyMode){<br>
+                                                    &ensp;&ensp;&ensp;case 4:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "gr");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                                
+                                                    &ensp;&ensp;&ensp;case 1:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "gru");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                                
+                                                    &ensp;&ensp;&ensp;case 3:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "grl");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                                
+                                                    &ensp;&ensp;&ensp;case 5:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "grr");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                                
+                                                    &ensp;&ensp;&ensp;case 7:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "grd");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                            
+                                                    &ensp;&ensp;&ensp;default:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "gr");<br>
+                                                    }<br>
+                                                    ...(省略)...<br>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 ps-0">
+                                                <div class="card-header">
+                                                    <div class="text-secondary text-center">
+                                                        CHaserOnlineAuto
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="text-secondary">GetReady.c</p>
+                                                    ...(省略)...<br>
+                                                    void GetReadyModePost(int GetReadyMode)<br>
+                                                    {<br>
+                                                    &ensp;&ensp;&ensp;// GetReadyコマンドの設定↓<br>
+                                                    &ensp;&ensp;&ensp;switch(GetReadyMode)<br>
+                                                    &ensp;&ensp;&ensp;{<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;case 4:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "gr");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                                    
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;case 1:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "gru");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                                    
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;case 3:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "grl");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                                    
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;case 5:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "grr");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                                    
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;case 7:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "grd");<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break;<br><br>
+                                                                
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;default:<br>
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;strcat(param, "gr");<br>
+                                                    &ensp;&ensp;&ensp;}<br>
+                                                    // GetReadyコマンドの設定↑<br>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h5">
+                                        Actionをプログラミングしよう!
+                                    </div>
+                                    <div class="card-text">
+                                        GetReadyMoveと同様にActionも一つの役割を持つファイルへとなっており、従来のやり方と違ってより、可読性に優れたプログラミングを実現しています。
+                                    </div>
+                                    <div class="card-text">
+                                        Actionをプログラミングするには、<mark>src/Action.c</mark>を開いて編集する必要があります。
+                                    </div>
+                                    <div class="card-text">
+                                        プログラミング方法は、GetReadyMoveと同様なので省略します。
+                                    </div>
+                                    <div class="h5 mt-3">
+                                        作戦をプログラミングしよう!
+                                    </div>
+                                    <div class="card-text">
+                                        こちらも役割を持つ独立したファイルになっており、従来のやり方と違ってより、可読性に優れたプログラミングを実現しています。
+                                    </div>
+                                    <div class="card-text">
+                                        作戦をプログラミングするには、<mark>src/Command.c</mark>を開いて編集する必要があります。
+                                    </div>
+                                    <div class="card-text">
+                                        プログラミング方法は、GetReadyMoveと同様なので省略します。
+                                    </div>
+                                    <br>
+                                    <div class="card-text">
+                                        さて、ここまででSrcフォルダ傘下はそれぞれ独立した役割を持つファイルになっていることに気付きましたでしょうか？
+                                    </div>
+                                    <div class="card-text">
+                                        ここまでをまとめると、
+                                    </div>
+                                    <br>
+                                    <ul>
+                                        <li><mark>src/GetReady.c</mark>はGetReadyMoveコマンドを定義するファイルになっている。</li>
+                                        <li><mark>src/Action.c</mark>はActionコマンドを定義するファイルになっている。</li>
+                                        <li><mark>src/Command.c</mark>は作戦を記述するファイルになっている。</li>
+                                        <li><mark>src/Base.c</mark>はCHaserOnlineクライアントの本体ファイル(ベース)になっている。</li>
+                                    </ul>
+                                    <br>
+                                    <div class="card-text">
+                                        など、それぞれ役割を持っています。
+                                    </div>
+                                    <div class="h5 mt-3">
+                                        CHaserOnlineAuto関数
+                                    </div>
+                                    <div class="card-text">
+                                        詳しくは、<a href="#CHaserOnlineAuto関数"  id="Select2">ここ</a>で確認できます。
+                                    </div>
+                                    <div class="card-text">
+                                        これにより、開発効率の向上と可読性をより優れたフレームワークを実現しています。
                                     </div>
                                 </div>
                             </li>
