@@ -515,7 +515,7 @@ int MapInit(int retsu1, int gyou1, int retsu2, int gyou2, int InitCharNumber, in
 
 void MapView(int HoseiReturnNumber[19][19], int ViewMode){
 	int gyou, retsu;
-	char Num2char[80] = " @X* TTTTt  o       WWWW      wwww      gggg      GGGG      BBBB      MMMMMMMMMM";
+	char Num2char[70] = " @X* TTTTt  o       WWWW      wwww      gggg      GGGG      BBBB";
 					//	 01234567890123456789012345678901234567890123456789012345678901234567890123456789
 					//	 0         1         2         3         4         5         6         7         8         9
 	char ClientChar[10] = " CHaserOn";

@@ -231,7 +231,6 @@ void LoopRun(char* username, char* password,char* Checkflag)
 // サンプルモード
 void SampleMode(char* username, char* password)
 {
-    int  File_Count = 0;
     char RoomNumber[MAX_LENGTH];
     char RunCommand[MAX_LENGTH];
     char Proxy[MAX_LENGTH];
@@ -258,40 +257,23 @@ void SampleMode(char* username, char* password)
     while ((entry = readdir(SampleHeaderDirectory)) != NULL) 
     {
         HeaderFileName = entry->d_name;
-        File_Count++;
-
-        if(File_Count > 3)
-        {
-            printf("\n> エラー\n");
-            printf("サンプルヘッダーは1つまで\n");
-            exit(1);
-        }
+        break;
     }
-    File_Count = 0;
     
     while ((entry2 = readdir(SampleSrcDirectory)) != NULL) 
     {
         SrcFileName = entry2->d_name;
-        File_Count++;
-
-        if(File_Count > 3)
-        {
-            printf("\n> エラー\n");
-            printf("サンプルソースは1つまで\n");
-            File_Count = 0;
-            exit(1);
-        }
+        break;
     }
-    File_Count = 0;
     closedir(SampleHeaderDirectory);
     closedir(SampleSrcDirectory);
 
     // コピーとコンパイル
-    sprintf(RunCommand,"cd Sample/Header;cp %s ../Src/;",HeaderFileName);
+    sprintf(RunCommand,"cd Sample/Header;cp -r %s ../Src/",HeaderFileName);
     system(RunCommand);
     sprintf(RunCommand,"cd Sample/Src;gcc %s",SrcFileName);
     system(RunCommand);
-  
+
     // ルーム番号入力
     printf("\n> ルーム番号を指定してください\n=");
     fgets(RoomNumber,MAX_LENGTH,stdin);
