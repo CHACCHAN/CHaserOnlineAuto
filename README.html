@@ -411,11 +411,77 @@
                                         CHaserOnlineAuto関数
                                     </div>
                                     <div class="card-text">
-                                        詳しくは、<a href="#CHaserOnlineAuto関数"  id="Select2">ここ</a>で確認できます。
+                                        CHaserOnlineAuto関数とは、作戦のプログラミングの支援をしてくれるヘルパー関数です。
                                     </div>
                                     <div class="card-text">
-                                        これにより、開発効率の向上と可読性をより優れたフレームワークを実現しています。
+                                        代表的な使い方を1つ紹介します。
                                     </div>
+                                    <div class="card-text">
+                                        以下は、アイテム番号50～60までを条件にしたときの処理コードが書かれています。
+                                    </div>
+                                    <div class="card my-3">
+                                        <div class="row">
+                                            <div class="col-6 pe-0 border-end">
+                                                <div class="card-header">
+                                                    従来方式
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-title">
+                                                        <div class="text-secondary">パターン1 - 脳筋</div>
+                                                    </div>
+                                                    <div class="card-text">
+                                                        if(<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 50 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 51 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 52 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 53 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 54 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 55 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 56 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 57 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 58 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 59 &&<br>
+                                                        <br>returnNumber[1] == 60 &&<br>
+                                                        )<br>
+                                                        {<br>
+                                                        &ensp;&ensp;&ensp;mode = 1;<br>
+                                                        }<br><br>
+                                                    </div>
+                                                    <div class="card-title">
+                                                        <div class="text-secondary">パターン2 - for文</div>
+                                                    </div>
+                                                    <div class="card-text">
+                                                        for(i = 50; i <= 60; i++)<br>
+                                                        {<br>
+                                                        &ensp;&ensp;&ensp;if(returnNumber[1] == i)<br>
+                                                        &ensp;&ensp;&ensp;{<br>
+                                                        &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;mode = 1;<br>
+                                                        &ensp;&ensp;&ensp;}<br>
+                                                        }<br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 ps-0">
+                                                <div class="card-header">
+                                                    CHaserOnlineAuto
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-title">
+                                                        <div class="text-secondary">SelectID関数を利用する</div>
+                                                    </div>
+                                                    <div class="card-text">
+                                                        if(returnNumber[1] == SelectID(returnNumber[1], 50, 60)){<br>
+                                                        &ensp;&ensp;&ensp;mode = 1;<br>
+                                                        }<br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-text">
+                                        詳しくは、<a href="#CHaserOnlineAuto関数"  id="HereLink">ここ</a>で確認できます。
+                                    </div>
+                                    
                                 </div>
                             </li>
                             <li class="list-group-item">
@@ -427,17 +493,18 @@
                 </div>
             </div>
         </div>
+
         <!-- Select2 -->
         <div id="Select2A">
             かきくけこ
         </div>
+
         <!-- Select3 -->
         <div id="Select3A">
             さしすせそ
         </div>
     </div>
     
-
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script>
@@ -470,6 +537,14 @@
         $('#Select1A').hide();
         $('#Select2A').hide();
         $('#Select3A').show('slow');
+    });
+    $('#HereLink').on('click', function(){
+        $('#Select1').animate({ opacity: 0.3 }, { duration: 400, easing: 'swing'});
+        $('#Select2').animate({ opacity: 1 }, { duration: 400, easing: 'swing'});
+        $('#Select3').animate({ opacity: 0.3 }, { duration: 400, easing: 'swing'});
+        $('#Select1A').hide();
+        $('#Select2A').show('slow');
+        $('#Select3A').hide();
     });
 </script>
 <!-- Popper.js -->
