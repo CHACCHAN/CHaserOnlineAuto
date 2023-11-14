@@ -427,36 +427,34 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="card-title">
-                                                        <div class="text-secondary">パターン1 - 脳筋</div>
+                                                        <div class="text-secondary">パターン1 - 初心者</div>
                                                     </div>
                                                     <div class="card-text">
                                                         if(<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 50 &&<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 51 &&<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 52 &&<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 53 &&<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 54 &&<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 55 &&<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 56 &&<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 57 &&<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 58 &&<br>
-                                                        &ensp;&ensp;&ensp;returnNumber[1] == 59 &&<br>
-                                                        <br>returnNumber[1] == 60 &&<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 50 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 51 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 52 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 53 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 54 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 55 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 56 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 57 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 58 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 59 ||<br>
+                                                        &ensp;&ensp;&ensp;returnNumber[1] == 60 ||<br>
                                                         )<br>
                                                         {<br>
                                                         &ensp;&ensp;&ensp;mode = 1;<br>
                                                         }<br><br>
                                                     </div>
                                                     <div class="card-title">
-                                                        <div class="text-secondary">パターン2 - for文</div>
+                                                        <div class="text-secondary">パターン2 - 中級者</div>
                                                     </div>
                                                     <div class="card-text">
-                                                        for(i = 50; i <= 60; i++)<br>
+                                                        <div class="text-secondary">// 範囲のみ指定できる</div>
+                                                        if(returnNumber[1] >= 50 && returnNumber[1] <= 60)<br>
                                                         {<br>
-                                                        &ensp;&ensp;&ensp;if(returnNumber[1] == i)<br>
-                                                        &ensp;&ensp;&ensp;{<br>
-                                                        &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;mode = 1;<br>
-                                                        &ensp;&ensp;&ensp;}<br>
+                                                        &ensp;&ensp;&ensp;mode = 1;<br>
                                                         }<br>
                                                     </div>
                                                 </div>
@@ -470,6 +468,7 @@
                                                         <div class="text-secondary">SelectID関数を利用する</div>
                                                     </div>
                                                     <div class="card-text">
+                                                        <div class="text-secondary">// 範囲の指定とアイテムの値を取得できる</div>
                                                         if(returnNumber[1] == SelectID(returnNumber[1], 50, 60)){<br>
                                                         &ensp;&ensp;&ensp;mode = 1;<br>
                                                         }<br>
